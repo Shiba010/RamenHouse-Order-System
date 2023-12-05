@@ -29,7 +29,7 @@ def load_item_pic():
 
 @app.route('/load_cata', methods=['GET'])
 def load_cata():
-    cata_dict = {0: 'Ramen', 1: 'Chachu', 2: 'Fried'}                  
+    cata_dict = {0: 'Ramen', 1: 'Chashu', 2: 'Fried'}                  
     return jsonify(cata_dict)
 
 

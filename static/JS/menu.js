@@ -10,6 +10,7 @@ let order_modal = document.getElementById("order-Modal");
 let modal = document.getElementById("myModal");
 let red_circle = document.getElementById("red-circle");
 
+let cartContent = document.getElementById('cart-content');
 let add_to_cart_btn = document.getElementById("add-to-cart");
 let cart_empty = document.getElementById("cart-empty");
 let total_price_elm = document.getElementById("cart-total-price");
@@ -177,9 +178,7 @@ add_to_cart_btn.addEventListener('click', function(){
 
         for (let key in cart) {
             number_of_items += cart[key];
-            total_price+=cart[key]*item_price[key];
-            console.log(key, cart[key], item_price[key]);
-            }
+            total_price+=cart[key]*item_price[key];}
         red_circle.innerHTML = number_of_items;
         total_price_elm.innerHTML = 'Total  $' + total_price;
 
@@ -224,16 +223,44 @@ cancel_cart.onclick = function() {
     modal_cart.style.display = "none";
 }
 
+
+
+
+function removeCartItem(idx) {
+    let itemDiv = document.getElementById('cart-div-'+idx);
+    if (itemDiv) {
+        itemDiv.parentNode.removeChild(itemDiv);
+        delete cart[idx];
+        let number_of_items = 0;
+        let total_price = 0;
+        for (let key in cart) {
+            number_of_items += cart[key];
+            total_price+=cart[key]*item_price[key];}
+        red_circle.innerHTML = number_of_items;
+        total_price_elm.innerHTML = 'Total  $' + total_price;
+        
+        if (Object.keys(cart).length === 0) {
+            red_circle.style.display = "none"
+            cart_empty.style.display = 'flex';
+            cartContent.style.display = "none";
+        }
+    }
+}
+
+
 function updateCartDisplay() {
     // Assuming item_name, item_pic, and item_price are already defined elsewhere
-    let cartContent = document.getElementById('cart-content');
+    
     cartContent.style.display = "block";
     cartContent.innerHTML = ''; // Clear the current cart content
 
+    
     for (let idx in cart) {
+
         if (cart.hasOwnProperty(idx)) { // Check if the key is part of the object
             let itemDiv = document.createElement('div');
             itemDiv.className = 'cart-item';
+            itemDiv.id = 'cart-div-'+idx;
             
             itemDiv.innerHTML = `
                 <img src="${item_pic[idx]}" class="cart-item-image" alt="Image of ${item_name[idx]}">
@@ -243,8 +270,8 @@ function updateCartDisplay() {
                         <span class="cart-item-quantity">X${cart[idx]}</span>
                     </div>
                     <div class="cart-item-edit">
-                        <img src="../static/Image/Utility/edit.png" class="cart-edit-icon alt="edit-icon">
-                        <img src="../static/Image/Utility/cross.png" class="cart-remove-icon alt="remove-icon">
+                        <img src="../static/Image/Utility/edit.png" class="cart-edit-icon" alt="edit-icon">
+                        <img src="../static/Image/Utility/cross.png" class="cart-remove-icon" id="cart-remove-${idx}"alt="remove-icon">
                     </div>
                 </div>
                 <div class="cart-item-price">$${cart[idx] * item_price[idx]}</div>
@@ -252,7 +279,14 @@ function updateCartDisplay() {
             
             // Append the new div to the cart content
             cartContent.appendChild(itemDiv);
+
+            let removeIcon = document.getElementById(`cart-remove-${idx}`);
+            removeIcon.addEventListener('click', function() {
+                removeCartItem(idx);
+            });
+
         }
+        
     }
 }    
 
@@ -263,5 +297,5 @@ order_btn.addEventListener("click", function(){
         setTimeout(function(){
             window.location.href = '/order_complete'
         }, 3000);
-        }
+    }
 });
