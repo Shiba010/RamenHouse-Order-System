@@ -1,0 +1,405 @@
+.container {
+    background-color:white;      
+    width: 390px;
+    height: 844px;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    /* flex-shrink: 0; */
+    /* justify-content: space-around; */
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+
+    flex-grow: 1 
+}
+
+.bar {
+    width: 390px; /* Width of the rectangle */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    color: black; /* Text color */
+    font-size: 20px; /* Text size */
+}
+
+       
+.bar-1{
+    height: 52px; /* Height of the rectangle */
+    background-color: black; /* Color of the rectangle */
+}
+
+.bar-2{
+    height: 42px; /* Height of the rectangle */
+    background-color: #FFE500; /* Color of the rectangle */
+}
+.bar-3{
+    height: 70px; /* Height of the rectangle */
+    background-color: white; /* Color of the rectangle */
+
+    display: flex;
+    justify-content: space-evenly; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.bar-4{
+    height: 150px; /* Height of the rectangle */
+    background-color: white; /* Color of the rectangle */
+
+    display: flex;
+    justify-content: flex-end; /* Center horizontally */
+    align-items: center; /* Center vertically */
+
+    margin-top: auto; 
+}
+
+.menu-page{
+    height: 529px;
+    width: 290px;
+
+    display:flex;
+    flex-direction: column;
+    /* justify-content: space-evenly;  */
+    align-items: center; /* 水平  */
+    background-color: white;
+    flex-grow: 1;
+}
+
+.b-line {
+    height: 1px; /* 線的高度 */
+    width: 390px;
+    background-color: #737373; /* 線的顏色 */
+}
+
+.food-container{
+    border-radius: 13px;
+    height: 202px;
+    width: 144px;
+
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-direction: column;
+
+    color: black;
+    font-size: 20px;
+    padding: 5px
+} 
+
+.food-container:hover {
+    background-color: #E6E6E6; /* Replace 'gray' with any color you prefer */
+    cursor: pointer;
+}
+
+/* food pic */
+.food{ 
+    height: 120px;
+    width: 120px;
+}
+
+.item-name{
+    font-family: Noto Sans;
+    font-size: 14px;
+    font-style: normal;
+}
+
+.item-price{
+    font-family: Noto Sans;
+    font-size: 14px;
+    font-style: normal;
+}
+
+
+/* a group container of two food */
+.two-food{
+    padding: 20px;
+    height: 180px;
+    width: 390px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.menu-page-chashu, .menu-page-ramen, .menu-page-fried{
+    display: none;
+}
+
+.menu-page-ramen{
+    display: block;
+} 
+
+
+.menu-btn {
+    display: flex;
+    width: 106px;
+    height: 44px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    border-radius: 13px; 
+    border: None;
+
+    /* background: var(--basic-y-100, #FFE500); */
+    background: var(--basic-y-100, #E6E6E6);
+
+
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+    font-family: Noto Sans;
+    font-size: 16px;
+}
+
+.menu-btn.active {
+    background: var(--basic-y-100, #FFE500); /* Yellow background for active state */
+}
+
+#cart-btn-wrapper{
+    height:100px;
+    width:100px;
+    position: relative; /* Container positioned relatively */
+}
+
+#red-circle{
+    background-color: red;
+    height:20px;
+    width: 20px;
+    color: white;
+    border-radius: 50%; /* Makes the div circular */
+    text-align: center; /* Centers the number horizontally */
+    vertical-align: middle;
+    line-height: 20px;  
+    font-size: 12px;
+
+    position: absolute; /* Position the circle absolutely */
+    top: 0px;
+    right: 10;
+
+    display:none;
+    /* transform: translate(50%, -50%);  */
+}
+
+#cart-btn{
+    position: absolute; /* Position the circle absolutely */
+    top: 15;
+    right: 10;
+    height: 66px;
+    width: 66px;
+    /* padding: 50px; */
+}
+
+#cart-btn:hover{
+    cursor: pointer;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    /* left: 0; */
+    top: auto;
+    width: 390px;
+    height: 844px;
+    /* overflow: auto;  */ /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    border-radius: 13px;
+    margin: 25% auto; /* 15% from the top and centered */
+
+   
+    width: 330px; 
+    height: 693px;
+    /* This will push the bars to the bottom */
+    /* justify-content: flex-end;  */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-grow: 1; 
+    /* padding: 0; */
+}
+
+.bars{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    width: 330px;
+    height: 116px;
+    margin-top: auto; 
+}
+
+.modal-bar {
+    width: 330px; /* Width of the rectangle */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    color: black; /* Text color */
+    font-size: 20px; /* Text size */
+}
+.mbar-top{
+    height: 49px;
+    background-color: #FFE500;
+    border-top-right-radius: 13px;
+    border-top-left-radius: 13px;
+}
+
+.mbar-food{
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+#cart-content{
+    height: 528px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#cart-empty{
+    height: 528px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-empty-font{
+    color: #737373;
+    font-size: 20px;
+}
+
+
+
+.mbar-7{
+    height:49px;
+    background-color: #F7F7F7;
+}
+
+.mbar-8{
+    height:67px;
+    display: flex;
+    flex-direction: row;
+}
+
+.box{
+    height: 67px;
+    width: 165px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    color: black; /* Text color */
+}
+
+.box:hover{
+    cursor: pointer;
+}
+
+.box-1{
+    background-color: #E6E6E6;
+    border-bottom-left-radius: 13px;
+}
+
+.box-2{
+    background-color: #FFE500;
+    border-bottom-right-radius: 13px;
+}
+
+.cart-item {
+    width: 330px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    border-bottom: 1px solid #737373; 
+}
+
+.cart-item-image {
+    width: 70px; 
+    height: 70px; 
+    margin-left: 10px;
+    object-fit: cover; /* Ensure the image covers the area */
+}
+
+.cart-item-description {
+    flex-grow: 1;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cart-item-text {
+    position: absolute;
+    top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.cart-item-name {
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.cart-item-quantity {
+    color: #737373;
+}
+
+.cart-item-edit {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+
+.cart-edit-icon, .cart-remove-icon {
+    cursor: pointer;
+    margin-left: 5px;
+    height: 24px;
+    width: 24px;
+}
+
+.cart-item-price {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-weight: bold;
+}
+
+#dancing-dog{
+    width: 316.8px;
+    height: 396px;
+}
+
+
+#order-modal{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+#order-modal-content {
+    margin: 25% auto; /* 15% from the top and centered */
+    width: 330px; 
+    height: 693px;
+    /* justify-content: flex-end;  */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    flex-grow: 1; 
+}
