@@ -1,6 +1,7 @@
 let item_name = {};
 let item_price = {};
 let item_pic = {};
+let cata = {};
 let cart = {};
 let order_btn = document.getElementById("order-btn");
 let order_modal = document.getElementById("order-Modal");
@@ -25,7 +26,19 @@ let cart_btn = document.getElementById("cart-btn");
 let cancel_cart = document.getElementsByClassName("close-cart")[0];
 
 
+// ES6 class
+class Food {
+    constructor(idx, name, price, img_src) {
+        this.idx = idx;
+        this.name = name;
+        this.price = price;
+        this.img_src = img_src;
+    }
+}
 
+
+
+// fetch the data from server
 function get_item_name() {
     const item_name_url = '/load_item_name';
     fetch(item_name_url)
@@ -43,6 +56,7 @@ function get_item_name() {
     .catch(error => console.error('Error:', error));
 }
 
+// fetch the data from server
 function get_item_price() {
     const item_price_url = '/load_item_price';
     fetch(item_price_url)
@@ -60,6 +74,26 @@ function get_item_price() {
     .catch(error => console.error('Error:', error));
 }
 
+// fetch the data from server
+function get_cata() {
+    const cata_url = '/load_cata';
+    fetch(cata_url)
+    .then(response => response.json())
+    .then(json => {
+        for (const key in json) {
+            cata[key] = json[key];
+            const cataName = json[key];
+            const cataElement = document.getElementById(`cata-name-${key}`);
+            console.log(cataElement);
+            if (cataElement) {
+                cataElement.innerHTML = cataName;
+            }
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// fetch the data from server
 function get_item_pic() {
     const item_pic_url = '/load_item_pic';
     fetch(item_pic_url)
@@ -72,10 +106,19 @@ function get_item_pic() {
     .catch(error => console.error('Error:', error));
 }
 
+
+// fetch the data from server
 document.addEventListener('DOMContentLoaded', (event) => {
     get_item_name();
+});
+document.addEventListener('DOMContentLoaded', (event) => {
     get_item_price();
+});
+document.addEventListener('DOMContentLoaded', (event) => {
     get_item_pic();
+});
+document.addEventListener('DOMContentLoaded', (event) => {
+    get_cata();
 });
 
 
@@ -90,7 +133,6 @@ function showModal(itemId) {
     modal.style.display = "block";
 }
 
-
 cancel.onclick = function() {
     modal.style.display = "none";
 }
@@ -103,6 +145,7 @@ window.onclick = function(event) {
 
 
 // Add click event listeners to each food-container
+// addEventListener x 12
 for (let i = 0; i < foodContainers.length; i++) {
     foodContainers[i].addEventListener('click', function() {
         modal.style.display = "block";
@@ -175,6 +218,7 @@ btn.addEventListener("click", function(e) {
 cart_btn.onclick = function() {
     modal_cart.style.display = "block";
 }
+
 // When the user clicks on <span> (x), close the modal
 cancel_cart.onclick = function() {
     modal_cart.style.display = "none";
@@ -213,14 +257,11 @@ function updateCartDisplay() {
 }    
 
 
-order_btn.onclick = function(){
+order_btn.addEventListener("click", function(){
     if(Object.keys(cart).length > 0){
         order_modal.style.display = "flex";
         setTimeout(function(){
             window.location.href = '/order_complete'
         }, 3000);
         }
-} 
-// order_btn.addEventListener("click", function(){
-//     order_modal.style.display = "block";
-// });
+});

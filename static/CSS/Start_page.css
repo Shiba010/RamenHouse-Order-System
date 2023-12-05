@@ -1,3 +1,7 @@
+* {
+    font-family: Noto Sans;
+}
+
 .bar {
     width: 390px; /* Width of the rectangle */
     height: 42px; /* Height of the rectangle */
@@ -36,12 +40,6 @@
     height: 60px;
     color: #FFFFFF;
     text-align: center;
-
-    /* shadow/botoom */
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-    /* 中英/文600 */
-    font-family: Noto Sans;
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
@@ -61,15 +59,16 @@
     border-radius: 13px;
     border: None;
     background: var(--basic-y-100, #FFE500);
-    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); */
-
     color: #000;
     text-align: center;
-    font-family: Noto Sans;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    
+}
+
+.btn:hover{
     cursor: pointer;
 }
 
