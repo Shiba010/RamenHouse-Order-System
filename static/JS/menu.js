@@ -145,12 +145,7 @@ cancel.onclick = function() {
     modal.style.display = "none";
 }
 
-// When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     } 
-// }
+
 
 
 
@@ -158,7 +153,6 @@ cancel.onclick = function() {
 // addEventListener x 12
 for (let i = 0; i < foodContainers.length; i++) {
     foodContainers[i].addEventListener('click', function() {
-        modal.style.display = "block";
         idx = i.toString();
         showModal(idx);
 
