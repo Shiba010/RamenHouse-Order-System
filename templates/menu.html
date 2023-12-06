@@ -10,13 +10,19 @@
 
     <div class="container">
         <div id="myModal" class="modal">
-            <div class="modal-content">    
+            <div class="modal-content" id="my-modal-content">    
                 <div class="modal-bar mbar-top">cart</div>
                 <div class="modal-bar mbar-food">
                     <img src="../static/Image/Food/ramen-1.png" id="modal-item-pic" alt="ramen-1" class="food">
                     <div class="item-name" id="modal-item-name"></div>
                 </div>
-                <div class="bars">
+
+                <div class="bars" id="myModal-bars">
+                    <div class="modal-bar mbar-edit">
+                        <div class="deduct-btn" id="item-deduct-btn">-</div>
+                        <div class="cur-qty" id="item-cur-qty"></div>
+                        <div class="add-btn" id="item-add-btn">+</div>
+                    </div>
                     <div class="modal-bar mbar-7" id="modal-item-price"></div>
                     <div class="modal-bar mbar-8">
                         <div class="box box-1 close-1">cancel</div>

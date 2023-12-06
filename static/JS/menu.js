@@ -27,6 +27,13 @@ let modal_cart = document.getElementById("cart-Modal");
 let cart_btn = document.getElementById("cart-btn");
 let cancel_cart = document.getElementsByClassName("close-cart")[0];
 
+let item_add_btn = document.getElementById("item-add-btn");
+let item_deduct_btn = document.getElementById("item-deduct-btn");
+let item_cur_qty = document.getElementById("item-cur-qty");
+
+//global variable to pass the qty of the item to add to the cart
+let temp_qrt = 1;
+
 
 // ES6 class
 class Food {
@@ -130,7 +137,6 @@ function showModal(itemId) {
     // Update the content of the modal
     document.getElementById("modal-item-pic").src = item_pic[itemId];
     document.getElementById("modal-item-name").innerHTML = item_name[itemId];
-    document.getElementById("modal-item-price").innerHTML = `$${item_price[itemId]}`;
     // Display the modal
     modal.style.display = "block";
 }
@@ -138,12 +144,14 @@ function showModal(itemId) {
 cancel.onclick = function() {
     modal.style.display = "none";
 }
+
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    } 
-}
+// window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     } 
+// }
+
 
 
 // Add click event listeners to each food-container
@@ -153,6 +161,33 @@ for (let i = 0; i < foodContainers.length; i++) {
         modal.style.display = "block";
         idx = i.toString();
         showModal(idx);
+
+        let add_cur_q = 1;
+        temp_qrt = add_cur_q;
+        item_cur_qty.innerHTML = add_cur_q;
+
+        document.getElementById("modal-item-price").innerHTML = `$${item_price[idx]*add_cur_q}`;
+
+        item_add_btn.addEventListener("click", function(){
+            add_cur_q+=1;
+            temp_qrt = add_cur_q;
+            item_cur_qty.innerHTML = add_cur_q;
+            document.getElementById("modal-item-price").innerHTML = `$${item_price[idx]*add_cur_q}`;
+        })
+        item_deduct_btn.addEventListener("click", function(){
+            if(add_cur_q>1){
+                add_cur_q-=1;
+                temp_qrt = add_cur_q;
+                item_cur_qty.innerHTML = add_cur_q;
+                document.getElementById("modal-item-price").innerHTML = `$${item_price[idx]*add_cur_q}`;
+            }
+            else{
+                add_cur_q = 1;
+                temp_qrt = add_cur_q;
+                item_cur_qty.innerHTML = add_cur_q;
+                document.getElementById("modal-item-price").innerHTML = `$${item_price[idx]*add_cur_q}`;
+            }
+        })
     });
 }
 
@@ -160,11 +195,13 @@ for (let i = 0; i < foodContainers.length; i++) {
 add_to_cart_btn.addEventListener('click', function(){
     if(idx!=null){
         if(cart[idx]===undefined){
-            cart[idx] = 1;
+            cart[idx] = temp_qrt;
         }
         else{
-            cart[idx] += 1;
+            cart[idx] += temp_qrt;
         }
+
+        temp_qrt = 1;
 
         if (Object.keys(cart).length > 0) {
             cart_empty.style.display = 'none';
@@ -175,7 +212,6 @@ add_to_cart_btn.addEventListener('click', function(){
 
         let number_of_items = 0;
         let total_price = 0;
-
 
         for (let key in cart) {
             number_of_items += cart[key];
@@ -251,6 +287,7 @@ function removeCartItem(idx) {
     if (itemDiv) {
         itemDiv.parentNode.removeChild(itemDiv);
         delete cart[idx];
+        delete edit_status[idx];
         let number_of_items = 0;
         let total_price = 0;
         for (let key in cart) {
@@ -310,6 +347,7 @@ function updateCartDisplay() {
             let removeIcon = document.getElementById(`cart-remove-${idx}`);
             removeIcon.addEventListener('click', function() {
                 removeCartItem(idx);
+
             });
 
             let editIcon_counter = 0;
@@ -386,8 +424,6 @@ function updateCartDisplay() {
         
     }
 }   
-
-
 
 
 order_btn.addEventListener("click", function(){

@@ -134,6 +134,11 @@
     font-style: normal;
 }
 
+#modal-item-name{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
 
 /* a group container of two food */
 .two-food{
@@ -245,6 +250,11 @@
     /* padding: 0; */
 }
 
+#my-modal-content{
+    height: 375px;
+    margin-top: 250px;
+}
+
 .bars{
     display: flex;
     flex-direction: column;
@@ -255,6 +265,10 @@
     margin-top: auto; 
 }
 
+#myModal-bars{
+    height: 165px;
+}
+
 .modal-bar {
     width: 330px; /* Width of the rectangle */
     display: flex;
@@ -263,6 +277,19 @@
     color: black; /* Text color */
     font-size: 20px; /* Text size */
 }
+
+.mbar-edit{
+    height: 49px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    background-color:  #E6E6E6; 
+    
+}
+
+
+
 .mbar-top{
     height: 49px;
     background-color: #FFE500;
@@ -456,5 +483,9 @@ p::-ms-ticks-after {
 
 .cur-qty{
     font-size: 40px;
+}
+
+#item-deduct-btn, #item-cur-qty, #item-add-btn{
+    font-size:20px;
 }
 
