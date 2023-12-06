@@ -346,7 +346,7 @@ function updateCartDisplay() {
                         total_price_elm.innerHTML = 'Total  $' + total_price;
 
                         //update the total price of this item in the cart
-                        cart_item_price.innerHTML = cart[idx] * item_price[idx];
+                        cart_item_price.innerHTML = '$' + (cart[idx] * item_price[idx]);
                     }
 
                 }
