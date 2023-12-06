@@ -5,13 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>menu page</title>
     <link rel="stylesheet" type="text/css" href="../static/CSS/menu.css">
+    <link href='http://fonts.googleapis.com/css?family=Noto+Sans:300,400,500,700,400italic,700italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </head>
+<style>
+    body {
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: 400;
+    }
+</style>
 <body>
 
     <div class="container">
         <div id="myModal" class="modal">
             <div class="modal-content" id="my-modal-content">    
-                <div class="modal-bar mbar-top">cart</div>
+                <div class="modal-bar mbar-top" id="modal-title">cart</div>
                 <div class="modal-bar mbar-food">
                     <img src="../static/Image/Food/ramen-1.png" id="modal-item-pic" alt="ramen-1" class="food">
                     <div class="item-name" id="modal-item-name"></div>
