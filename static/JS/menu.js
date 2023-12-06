@@ -309,6 +309,9 @@ function updateCartDisplay() {
                     let current_qnt_div = document.getElementById(`cur-quantity-${idx}`);
 
                     add_btn.addEventListener("click", function(){
+                        if(current_qnt===0){
+                            editIcon.src = "../static/Image/Utility/v.png";
+                        }
                         current_qnt+=1;
                         current_qnt_div.innerHTML = current_qnt;
                     })
@@ -317,6 +320,9 @@ function updateCartDisplay() {
                             current_qnt-=1;
                             current_qnt_div.innerHTML = current_qnt;
                         }  
+                        if(current_qnt===0){
+                            editIcon.src = "../static/Image/Utility/trashcan.png";
+                        }
                     })
                 }
                 else{
