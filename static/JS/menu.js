@@ -3,6 +3,7 @@ let item_price = {};
 let item_pic = {};
 let cata = {};
 let cart = {};
+let edit_status = {}; //status of click on edit
 let order_btn = document.getElementById("order-btn");
 let order_modal = document.getElementById("order-Modal");
 
@@ -218,9 +219,28 @@ cart_btn.onclick = function() {
     modal_cart.style.display = "block";
 }
 
+function edit_total_status(){
+    if(Object.keys(edit_status).length===0){
+        return true;
+    }
+
+    let sum = 0;
+    for (let key in edit_status) {
+        sum += edit_status[key];
+    }
+    if(sum===0){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 // When the user clicks on <span> (x), close the modal
 cancel_cart.onclick = function() {
-    modal_cart.style.display = "none";
+    if(edit_total_status()){
+        modal_cart.style.display = "none";
+    }
 }
 
 
@@ -248,11 +268,18 @@ function removeCartItem(idx) {
 }
 
 
+
+
 function updateCartDisplay() {
     // Assuming item_name, item_pic, and item_price are already defined elsewhere
     
     cartContent.style.display = "block";
     cartContent.innerHTML = ''; // Clear the current cart content
+
+
+    for (let idx in cart){
+        edit_status[idx] = 0;
+    }
 
     
     for (let idx in cart) {
@@ -297,6 +324,7 @@ function updateCartDisplay() {
                 editIcon_counter+=1
                 if(editIcon_counter%2===1){
                     editIcon.src = "../static/Image/Utility/v.png";
+                    edit_status[idx] = 1;
                     
                     
                     qnt_div.innerHTML = `
@@ -326,9 +354,11 @@ function updateCartDisplay() {
                     })
                 }
                 else{
-                    editIcon.src = "../static/Image/Utility/edit.png"
+                    editIcon.src = "../static/Image/Utility/edit.png";
+                    edit_status[idx] = 0;
                     if(current_qnt===0){
                         removeCartItem(idx);
+                        delete edit_status[idx];
                     }
                     else{
                         // update the cart
@@ -355,14 +385,17 @@ function updateCartDisplay() {
         }
         
     }
-}    
+}   
+
+
 
 
 order_btn.addEventListener("click", function(){
-    if(Object.keys(cart).length > 0){
+    if(Object.keys(cart).length > 0 && edit_total_status()){
         order_modal.style.display = "flex";
         setTimeout(function(){
             window.location.href = '/order_complete'
         }, 3000);
     }
 });
+
