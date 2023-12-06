@@ -375,6 +375,10 @@
 
 .cart-item-quantity {
     color: #737373;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100px;
 }
 
 .cart-item-edit {
@@ -443,3 +447,14 @@ p::-ms-ticks-after {
     flex-direction: column;
     flex-grow: 1; 
 }
+
+.add-btn, .deduct-btn{
+    cursor: pointer;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.cur-qty{
+    font-size: 40px;
+}
+

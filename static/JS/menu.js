@@ -267,14 +267,14 @@ function updateCartDisplay() {
                 <div class="cart-item-description">
                     <div class="cart-item-text">
                         <span class="cart-item-name">${item_name[idx]}</span>
-                        <span class="cart-item-quantity">X${cart[idx]}</span>
+                        <span class="cart-item-quantity" id="cart-item-quantity-${idx}">X${cart[idx]}</span>
                     </div>
                     <div class="cart-item-edit">
-                        <img src="../static/Image/Utility/edit.png" class="cart-edit-icon" alt="edit-icon">
-                        <img src="../static/Image/Utility/cross.png" class="cart-remove-icon" id="cart-remove-${idx}"alt="remove-icon">
+                        <img src="../static/Image/Utility/edit.png" class="cart-edit-icon" id="cart-edit-${idx}"valt="edit-icon">
+                        <img src="../static/Image/Utility/cross.png" class="cart-remove-icon" id="cart-remove-${idx}" alt="remove-icon">
                     </div>
                 </div>
-                <div class="cart-item-price">$${cart[idx] * item_price[idx]}</div>
+                <div class="cart-item-price" id="cart-item-price-${idx}">$${cart[idx] * item_price[idx]}</div>
             `;
             
             // Append the new div to the cart content
@@ -283,6 +283,67 @@ function updateCartDisplay() {
             let removeIcon = document.getElementById(`cart-remove-${idx}`);
             removeIcon.addEventListener('click', function() {
                 removeCartItem(idx);
+            });
+
+            let editIcon_counter = 0;
+
+            let editIcon = document.getElementById(`cart-edit-${idx}`);
+            let qnt_div = document.getElementById(`cart-item-quantity-${idx}`);
+            let current_qnt = cart[idx];
+            let cart_item_price = document.getElementById(`cart-item-price-${idx}`);
+            
+
+            editIcon.addEventListener('click', function() {
+                editIcon_counter+=1
+                if(editIcon_counter%2===1){
+                    editIcon.src = "../static/Image/Utility/v.png";
+                    
+                    
+                    qnt_div.innerHTML = `
+                        <div class="deduct-btn" id="deduct-${idx}"> - </div>
+                        <div class="cur-qty" id="cur-quantity-${idx}"> ${current_qnt} </div>
+                        <div class="add-btn" id="add-${idx}"> + </div>
+                    `
+                    let add_btn = document.getElementById(`add-${idx}`);
+                    let deduct_btn = document.getElementById(`deduct-${idx}`);
+                    let current_qnt_div = document.getElementById(`cur-quantity-${idx}`);
+
+                    add_btn.addEventListener("click", function(){
+                        current_qnt+=1;
+                        current_qnt_div.innerHTML = current_qnt;
+                    })
+                    deduct_btn.addEventListener("click", function(){
+                        if(current_qnt>0){
+                            current_qnt-=1;
+                            current_qnt_div.innerHTML = current_qnt;
+                        }  
+                    })
+                }
+                else{
+                    editIcon.src = "../static/Image/Utility/edit.png"
+                    if(current_qnt===0){
+                        removeCartItem(idx);
+                    }
+                    else{
+                        // update the cart
+                        cart[idx] = current_qnt;
+                        // update the current quantity in div
+                        qnt_div.innerHTML = `X${cart[idx]}`;
+                        
+                        // calculate the number for red circle and the total price
+                        let number_of_items = 0;
+                        let total_price = 0;
+                        for (let key in cart) {
+                            number_of_items += cart[key];
+                            total_price+=cart[key]*item_price[key];}
+                        red_circle.innerHTML = number_of_items;
+                        total_price_elm.innerHTML = 'Total  $' + total_price;
+
+                        //update the total price of this item in the cart
+                        cart_item_price.innerHTML = cart[idx] * item_price[idx];
+                    }
+
+                }
             });
 
         }
